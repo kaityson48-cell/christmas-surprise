@@ -4,209 +4,145 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Merry Christmas!</title>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        
+        :root {
+            --bg-color: #eef2f5;
+            --card-white: #ffffff;
+            --blue-btn: #0095ff;
+        }
+
         body {
-            background: radial-gradient(circle at center, #ffffff 0%, #d7e9f7 100%);
-            height: 100vh;
+            margin: 0;
+            padding: 0;
             display: flex;
             justify-content: center;
             align-items: center;
+            min-height: 100vh;
+            background-color: var(--bg-color);
+            background-image: radial-gradient(#d1e4f0 1px, transparent 1px);
+            background-size: 20px 20px;
             font-family: 'Poppins', sans-serif;
             overflow: hidden;
-            position: relative;
         }
 
-        /* Snowfall Effect */
-        .snowflake {
-            position: absolute;
-            top: -10px;
-            color: #fff;
-            user-select: none;
-            z-index: 1000;
-            pointer-events: none;
-            animation: fall linear infinite;
-        }
-
-        @keyframes fall {
-            to { transform: translateY(105vh); }
-        }
-
-        .card-container {
-            width: 350px;
-            height: 580px;
-            background-color: white;
-            position: relative;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-            border-radius: 15px;
-            background-image: linear-gradient(#e1e1e1 1px, transparent 1px), linear-gradient(90deg, #e1e1e1 1px, transparent 1px);
-            background-size: 22px 22px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border: 1px solid #eee;
-            z-index: 10;
-        }
-
-        .screen {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 25px;
+        /* Main Container */
+        .container {
+            width: 90%;
+            max-width: 400px;
+            background: var(--card-white);
+            padding: 40px 20px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
             text-align: center;
-            transition: all 0.4s ease-in-out;
+            position: relative;
+            background-image: linear-gradient(#e5e5e5 1px, transparent 1px), linear-gradient(90deg, #e5e5e5 1px, transparent 1px);
+            background-size: 25px 25px;
         }
 
-        .hidden { opacity: 0; pointer-events: none; transform: scale(0.9); }
+        .hidden { display: none !important; }
 
-        .cursive-title {
+        /* Typography */
+        h1 {
             font-family: 'Dancing Script', cursive;
-            font-size: 28px;
+            font-size: 2.2rem;
             color: #333;
             margin-bottom: 20px;
         }
 
-        .message-box {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            border: 1px solid #f0f0f0;
-            cursor: pointer;
-            width: 90%;
-            position: relative;
-        }
+        p { color: #555; line-height: 1.6; }
 
-        .btn-open {
-            background: #0095ff;
+        /* Snowman & Illustrations */
+        .illustration { font-size: 80px; margin-bottom: 20px; }
+
+        /* Buttons */
+        .btn {
+            background: var(--blue-btn);
             color: white;
             border: none;
-            padding: 12px 45px;
-            border-radius: 30px;
-            font-size: 18px;
-            font-weight: 600;
+            padding: 12px 40px;
+            border-radius: 25px;
+            font-size: 1rem;
             cursor: pointer;
-            margin-top: 15px;
+            box-shadow: 0 4px 15px rgba(0, 149, 255, 0.3);
+            transition: transform 0.2s;
         }
 
-        .badge {
+        .btn:active { transform: scale(0.95); }
+
+        /* Message Card Style */
+        .message-card {
+            background: #f0f8ff;
+            border-radius: 8px;
+            padding: 20px;
+            border: 1px solid #ddecfa;
+            position: relative;
+            cursor: pointer;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .tap-badge {
+            position: absolute;
+            top: 10px;
+            right: -10px;
             background: #e63946;
             color: white;
-            font-size: 11px;
-            padding: 4px 12px;
+            padding: 4px 10px;
+            font-size: 0.7rem;
             border-radius: 4px;
-            position: absolute;
-            top: 15px;
-            right: -5px;
-            font-weight: bold;
         }
 
-        /* Final Gallery Styles */
-        .photo-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            width: 100%;
-            margin-top: 15px;
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-
-        .photo-slot {
-            background: #f8f8f8;
-            border: 2px dashed #ccc;
-            height: 80px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 10px;
-            color: #999;
-            border-radius: 5px;
-        }
-
-        .final-header { border-top: 8px solid #e63946; padding-top: 15px; }
-        .footer { position: absolute; bottom: 10px; right: 15px; font-size: 10px; color: #ccc; }
     </style>
 </head>
 <body>
 
-    <div class="card-container">
-        <div id="p1" class="screen">
-            <div style="font-size: 70px;">⛄</div>
-            <h1 class="cursive-title">This Christmas, <br> something special for you</h1>
-            <button class="btn-open" onclick="go(2)">Open it</button>
-        </div>
+    <div id="screen1" class="container">
+        <div class="illustration">⛄</div>
+        <h1>This Christmas, <br> something special for you</h1>
+        <button class="btn" onclick="showScreen(2)">Open it</button>
+    </div>
 
-        <div id="p2" class="screen hidden">
-            <h1 class="cursive-title">Merry Christmas <br> to my Cutiepie</h1>
-            <div class="message-box" onclick="go(3)">
-                <div class="badge">Tap to read</div>
-                <div style="font-size: 80px;">🎅</div>
-            </div>
+    <div id="screen2" class="container hidden">
+        <h1>Merry Christmas to my Cutiepie</h1>
+        <div class="message-card" onclick="showScreen(3)">
+            <span class="tap-badge">Tap to read</span>
+            <div class="illustration">🎅</div>
+            <p>A little surprise is waiting inside...</p>
         </div>
+    </div>
 
-        <div id="p3" class="screen hidden">
-            <h1 class="cursive-title">Merry Christmas <br> to my Cutiepie</h1>
-            <div class="message-box" onclick="go(4)">
-                <p>This Christmas, I just want you to know how special you are to me.</p>
-                <br>
-                <p>You are the reason behind so many smiles.</p>
-            </div>
+    <div id="screen3" class="container hidden">
+        <h1>Merry Christmas to my Cutiepie</h1>
+        <div class="message-card" onclick="showScreen(4)">
+            <p>This Christmas, I just want you to know how special you are to me.</p>
+            <p>You are not just a part of my life, you are the reason behind so many smiles and little moments.</p>
+            <small style="color: #aaa;">(Tap to continue)</small>
         </div>
+    </div>
 
-        <div id="p4" class="screen hidden">
-            <h1 class="cursive-title">Merry Christmas <br> to my Cutiepie</h1>
-            <div class="message-box" onclick="go(5)">
-                <p>I'll always try my best to be there for you.</p>
-                <p><strong>Thank you for being you.</strong></p>
-            </div>
+    <div id="screen4" class="container hidden">
+        <h1>Merry Christmas to my Cutiepie</h1>
+        <div class="message-card">
+            <p>I may not be perfect, but I promise one thing: whenever you share a wish, a dream, or even a silly thought,</p>
+            <p>I'll always try my best to be there for you.</p>
+            <p><strong>Thank you for being you.</strong></p>
+            <p>Merry Christmas ❤️ 🎄</p>
         </div>
-
-        <div id="p5" class="screen hidden final-header">
-            <div style="font-size: 40px;">🎄 🎁</div>
-            <h1 class="cursive-title" style="color: #e63946; font-size: 24px;">Merry Christmas, Pooja Sagar!</h1>
-            <p style="font-weight: bold; font-size: 14px;">(Meri Churail 🧟‍♀️)</p>
-            <p style="font-size: 12px; font-style: italic; margin-top: 5px;">
-                "Merry Christmas churail aur haa cringe hai lakin kuch try karna tha tera liya"
-            </p>
-            
-            <div class="photo-grid">
-                <div class="photo-slot">Photo 1</div>
-                <div class="photo-slot">Photo 2</div>
-                <div class="photo-slot">Photo 3</div>
-                <div class="photo-slot">Photo 4</div>
-            </div>
-            <div style="font-size: 20px; margin-top: 10px;">❄️ ✨ ☃️</div>
-        </div>
-
-        <div class="footer">@anujbuilds</div>
     </div>
 
     <script>
-        // Transition logic
-        function go(n) {
-            document.querySelectorAll('.screen').forEach(s => s.classList.add('hidden'));
-            document.getElementById('p' + n).classList.remove('hidden');
+        function showScreen(screenNum) {
+            // Hide all containers
+            document.querySelectorAll('.container').forEach(div => {
+                div.classList.add('hidden');
+            });
+            // Show the target container
+            document.getElementById('screen' + screenNum).classList.remove('hidden');
         }
-
-        // Snowfall logic
-        function createSnowflake() {
-            const snowflake = document.createElement('div');
-            snowflake.classList.add('snowflake');
-            snowflake.innerHTML = '●';
-            snowflake.style.left = Math.random() * 100 + 'vw';
-            snowflake.style.animationDuration = Math.random() * 3 + 2 + 's';
-            snowflake.style.opacity = Math.random();
-            snowflake.style.fontSize = Math.random() * 10 + 5 + 'px';
-            
-            document.body.appendChild(snowflake);
-            setTimeout(() => { snowflake.remove(); }, 5000);
-        }
-        setInterval(createSnowflake, 100);
     </script>
 </body>
     </html>
