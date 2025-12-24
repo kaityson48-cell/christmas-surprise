@@ -14,7 +14,20 @@
             min-height: 100vh;
             background-color: #f0f7ff;
             font-family: 'Poppins', sans-serif;
+            overflow: hidden;
         }
+
+        /* Snowfall Animation */
+        .snowflake {
+            position: absolute;
+            top: -10px;
+            color: #fff;
+            user-select: none;
+            z-index: 1000;
+            pointer-events: none;
+            animation: fall linear infinite;
+        }
+        @keyframes fall { to { transform: translateY(105vh); } }
 
         .card {
             width: 320px;
@@ -25,9 +38,9 @@
             text-align: center;
             padding-bottom: 30px;
             position: relative;
+            z-index: 10;
         }
 
-        /* The red curved header seen in the image */
         .red-header {
             height: 40px;
             background-color: #e63946;
@@ -37,10 +50,7 @@
             margin-bottom: 20px;
         }
 
-        .icons-top {
-            font-size: 50px;
-            margin: 10px 0;
-        }
+        .icons-top { font-size: 50px; margin: 10px 0; }
 
         h1 {
             font-family: 'Dancing Script', cursive;
@@ -50,11 +60,7 @@
             line-height: 1.2;
         }
 
-        .nickname {
-            font-weight: 600;
-            color: #2b4d66;
-            margin-bottom: 20px;
-        }
+        .nickname { font-weight: 600; color: #2b4d66; margin-bottom: 20px; }
 
         .message {
             font-size: 14px;
@@ -64,6 +70,18 @@
             font-style: italic;
         }
 
+        .music-btn {
+            background: #e63946;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 12px;
+            margin-top: 15px;
+            font-weight: 600;
+        }
+
         .icons-bottom {
             font-size: 30px;
             margin-top: 20px;
@@ -71,9 +89,27 @@
             justify-content: center;
             gap: 15px;
         }
+
+        /* Hidden YouTube Player */
+        #youtube-player { display: none; }
     </style>
 </head>
 <body>
+
+    <script>
+        function createSnow() {
+            const flake = document.createElement('div');
+            flake.classList.add('snowflake');
+            flake.innerHTML = '●';
+            flake.style.left = Math.random() * 100 + 'vw';
+            flake.style.animationDuration = Math.random() * 3 + 2 + 's';
+            flake.style.opacity = Math.random();
+            flake.style.fontSize = Math.random() * 10 + 5 + 'px';
+            document.body.appendChild(flake);
+            setTimeout(() => flake.remove(), 5000);
+        }
+        setInterval(createSnow, 100);
+    </script>
 
     <div class="card">
         <div class="red-header"></div>
@@ -87,6 +123,8 @@
         <p class="message">
             "Merry Christmas churail aur haa cringe hai yeah lakin kuch try karna tha tera liya"
         </p>
+
+        <button class="music-btn" onclick="playMusic()">🎵 Play Dandelions</button>
         
         <div class="icons-bottom">
             <span>❄️</span>
@@ -95,6 +133,18 @@
         </div>
     </div>
 
+    <div id="youtube-player">
+        <iframe id="video" width="0" height="0" src="https://www.youtube.com/embed/W8a4sUADZ8E?enablejsapi=1" frameborder="0"></iframe>
+    </div>
+
+    <script>
+        function playMusic() {
+            const iframe = document.getElementById('video');
+            // Sending the play command to the YouTube API
+            iframe.src += "&autoplay=1";
+            document.querySelector('.music-btn').style.display = 'none';
+        }
+    </script>
+
 </body>
-    </html>
-    
+</html>
