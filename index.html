@@ -16,11 +16,27 @@
             align-items: center;
             font-family: 'Poppins', sans-serif;
             overflow: hidden;
+            position: relative;
+        }
+
+        /* Snowfall Effect */
+        .snowflake {
+            position: absolute;
+            top: -10px;
+            color: #fff;
+            user-select: none;
+            z-index: 1000;
+            pointer-events: none;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            to { transform: translateY(105vh); }
         }
 
         .card-container {
             width: 350px;
-            height: 550px;
+            height: 580px;
             background-color: white;
             position: relative;
             box-shadow: 0 10px 40px rgba(0,0,0,0.1);
@@ -31,6 +47,7 @@
             justify-content: center;
             align-items: center;
             border: 1px solid #eee;
+            z-index: 10;
         }
 
         .screen {
@@ -41,7 +58,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 30px;
+            padding: 25px;
             text-align: center;
             transition: all 0.4s ease-in-out;
         }
@@ -50,7 +67,7 @@
 
         .cursive-title {
             font-family: 'Dancing Script', cursive;
-            font-size: 30px;
+            font-size: 28px;
             color: #333;
             margin-bottom: 20px;
         }
@@ -90,9 +107,28 @@
             font-weight: bold;
         }
 
-        /* Final Screen Decoration */
-        .final-header { border-top: 8px solid #e63946; padding-top: 20px; }
-        .final-title { color: #e63946; font-family: 'Dancing Script', cursive; font-size: 28px; }
+        /* Final Gallery Styles */
+        .photo-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            width: 100%;
+            margin-top: 15px;
+        }
+
+        .photo-slot {
+            background: #f8f8f8;
+            border: 2px dashed #ccc;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            color: #999;
+            border-radius: 5px;
+        }
+
+        .final-header { border-top: 8px solid #e63946; padding-top: 15px; }
         .footer { position: absolute; bottom: 10px; right: 15px; font-size: 10px; color: #ccc; }
     </style>
 </head>
@@ -118,7 +154,7 @@
             <div class="message-box" onclick="go(4)">
                 <p>This Christmas, I just want you to know how special you are to me.</p>
                 <br>
-                <p>You are not just a part of my life, you are the reason behind so many smiles.</p>
+                <p>You are the reason behind so many smiles.</p>
             </div>
         </div>
 
@@ -127,29 +163,51 @@
             <div class="message-box" onclick="go(5)">
                 <p>I'll always try my best to be there for you.</p>
                 <p><strong>Thank you for being you.</strong></p>
-                <p style="margin-top: 10px; color: #0095ff; font-size: 12px;">(Click for final surprise 🎁)</p>
             </div>
         </div>
 
         <div id="p5" class="screen hidden final-header">
-            <div style="font-size: 50px;">🎄 🎁</div>
-            <h1 class="final-title">Merry Christmas, Pooja Sagar!</h1>
-            <p style="font-weight: bold;">(Meri Churail 🧟‍♀️)</p>
-            <p style="font-size: 14px; font-style: italic; margin-top: 15px;">
-                "Merry Christmas churail aur haa cringe hai <br> yeah lakin kuch try karna tha tera liya"
+            <div style="font-size: 40px;">🎄 🎁</div>
+            <h1 class="cursive-title" style="color: #e63946; font-size: 24px;">Merry Christmas, Pooja Sagar!</h1>
+            <p style="font-weight: bold; font-size: 14px;">(Meri Churail 🧟‍♀️)</p>
+            <p style="font-size: 12px; font-style: italic; margin-top: 5px;">
+                "Merry Christmas churail aur haa cringe hai lakin kuch try karna tha tera liya"
             </p>
-            <div style="font-size: 30px; margin-top: 15px;">❄️ ✨ ☃️</div>
+            
+            <div class="photo-grid">
+                <div class="photo-slot">Photo 1</div>
+                <div class="photo-slot">Photo 2</div>
+                <div class="photo-slot">Photo 3</div>
+                <div class="photo-slot">Photo 4</div>
+            </div>
+            <div style="font-size: 20px; margin-top: 10px;">❄️ ✨ ☃️</div>
         </div>
 
         <div class="footer">@anujbuilds</div>
     </div>
 
     <script>
+        // Transition logic
         function go(n) {
             document.querySelectorAll('.screen').forEach(s => s.classList.add('hidden'));
             document.getElementById('p' + n).classList.remove('hidden');
         }
+
+        // Snowfall logic
+        function createSnowflake() {
+            const snowflake = document.createElement('div');
+            snowflake.classList.add('snowflake');
+            snowflake.innerHTML = '●';
+            snowflake.style.left = Math.random() * 100 + 'vw';
+            snowflake.style.animationDuration = Math.random() * 3 + 2 + 's';
+            snowflake.style.opacity = Math.random();
+            snowflake.style.fontSize = Math.random() * 10 + 5 + 'px';
+            
+            document.body.appendChild(snowflake);
+            setTimeout(() => { snowflake.remove(); }, 5000);
+        }
+        setInterval(createSnowflake, 100);
     </script>
 </body>
-                </html>
+    </html>
     
