@@ -3,64 +3,97 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Merry Christmas Pooja Sagar</title>
+    <title>Merry Christmas Pooja</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:ital,wght@0,400;1,300&display=swap" rel="stylesheet">
     <style>
         body {
-            background-color: #f1faff;
-            color: #333;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
             display: flex;
-            flex-direction: column;
-            align-items: center;
             justify-content: center;
+            align-items: center;
             min-height: 100vh;
-            text-align: center;
+            background-color: #f0f7ff;
+            font-family: 'Poppins', sans-serif;
         }
-        .container {
+
+        .card {
             background: white;
-            padding: 30px;
-            border-radius: 20px;
+            width: 90%;
+            max-width: 400px;
+            padding: 40px 20px;
+            border-radius: 25px;
+            text-align: center;
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            border-top: 10px solid #e63946;
-            max-width: 90%;
+            border-top: 8px solid #e63946; /* The red top border from your image */
+            position: relative;
         }
-        h1 {
-            color: #e63946;
-            font-size: 2rem;
+
+        .emojis-top {
+            font-size: 50px;
             margin-bottom: 10px;
         }
-        h2 {
-            color: #1b4332;
-            font-size: 1.2rem;
-        }
-        p {
-            font-size: 1.1rem;
-            line-height: 1.6;
-            color: #555;
-            margin-top: 20px;
-            font-style: italic;
-        }
-        .emoji {
-            font-size: 3rem;
+
+        h1 {
+            color: #e63946;
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.5rem;
             margin: 10px 0;
+            line-height: 1.2;
+        }
+
+        .nickname {
+            font-weight: bold;
+            font-style: italic;
+            color: #1d3557;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+
+        .message {
+            font-size: 0.95rem;
+            color: #444;
+            line-height: 1.6;
+            font-style: italic;
+            padding: 0 10px;
+            margin: 20px 0;
+        }
+
+        .emojis-bottom {
+            font-size: 30px;
+            letter-spacing: 10px;
+            margin-top: 20px;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 480px) {
+            h1 { font-size: 2rem; }
+            .card { width: 85%; }
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <div class="emoji">🎄🎁</div>
+    <div class="card">
+        <div class="emojis-top">🎄 🎁</div>
+        
         <h1>Merry Christmas, Pooja Sagar!</h1>
-        <h2>(Meri Churail 🧟‍♀️)</h2>
         
-        <p>
-            "Merry Christmas churail aur haa cringe hai yeah lakin kuch try karna tha tera liya"
+        <div class="nickname">
+            (Meri Churail 🧟‍♀️)
+        </div>
+
+        <p class="message">
+            "Merry Christmas churail aur haa cringe hai <br>
+            yeah lakin kuch try karna tha tera liya"
         </p>
-        
-        <div class="emoji" style="font-size: 1.5rem;">❄️✨⛄</div>
+
+        <div class="emojis-bottom">❄️ ✨ ☃️</div>
     </div>
 
 </body>
-</html>
+    </html>
+            
