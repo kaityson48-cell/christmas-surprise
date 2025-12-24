@@ -3,148 +3,168 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Merry Christmas Pooja!</title>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+    <title>Merry Christmas!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
         body {
-            margin: 0;
+            background: radial-gradient(circle at center, #ffffff 0%, #d7e9f7 100%);
+            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
-            background-color: #f0f7ff;
             font-family: 'Poppins', sans-serif;
             overflow: hidden;
         }
 
-        /* Snowfall Animation */
-        .snowflake {
-            position: absolute;
-            top: -10px;
-            color: #fff;
-            user-select: none;
-            z-index: 1000;
-            pointer-events: none;
-            animation: fall linear infinite;
-        }
-        @keyframes fall { to { transform: translateY(105vh); } }
-
-        .card {
-            width: 320px;
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            overflow: hidden;
-            text-align: center;
-            padding-bottom: 30px;
+        .card-container {
+            width: 350px;
+            height: 550px;
+            background-color: white;
             position: relative;
-            z-index: 10;
-        }
-
-        .red-header {
-            height: 40px;
-            background-color: #e63946;
-            width: 100%;
-            border-bottom-left-radius: 50% 20%;
-            border-bottom-right-radius: 50% 20%;
-            margin-bottom: 20px;
-        }
-
-        .icons-top { font-size: 50px; margin: 10px 0; }
-
-        h1 {
-            font-family: 'Dancing Script', cursive;
-            color: #e63946;
-            font-size: 28px;
-            margin: 10px 0;
-            line-height: 1.2;
-        }
-
-        .nickname { font-weight: 600; color: #2b4d66; margin-bottom: 20px; }
-
-        .message {
-            font-size: 14px;
-            color: #555;
-            padding: 0 25px;
-            line-height: 1.6;
-            font-style: italic;
-        }
-
-        .music-btn {
-            background: #e63946;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 12px;
-            margin-top: 15px;
-            font-weight: 600;
-        }
-
-        .icons-bottom {
-            font-size: 30px;
-            margin-top: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            border-radius: 15px;
+            background-image: 
+                linear-gradient(#e1e1e1 1px, transparent 1px),
+                linear-gradient(90deg, #e1e1e1 1px, transparent 1px);
+            background-size: 22px 22px;
             display: flex;
             justify-content: center;
-            gap: 15px;
+            align-items: center;
+            border: 1px solid #eee;
         }
 
-        /* Hidden YouTube Player */
-        #youtube-player { display: none; }
+        .screen {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.4s ease-in-out;
+        }
+
+        .hidden { opacity: 0; pointer-events: none; transform: scale(0.9); }
+
+        /* Styling for the New Final Screen */
+        .red-header-card {
+            border-top: 8px solid #e63946;
+            padding-top: 20px;
+        }
+
+        .cursive-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 28px;
+            color: #e63946;
+            margin-bottom: 10px;
+        }
+
+        .hindi-text {
+            font-size: 14px;
+            font-style: italic;
+            color: #444;
+            margin: 15px 0;
+        }
+
+        .message-inner-box {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border: 1px solid #f0f0f0;
+            cursor: pointer;
+            width: 90%;
+        }
+
+        .btn-open {
+            background: #0095ff;
+            color: white;
+            border: none;
+            padding: 12px 45px;
+            border-radius: 30px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+
+        .badge-red {
+            background: #e63946;
+            color: white;
+            font-size: 11px;
+            padding: 4px 12px;
+            border-radius: 4px;
+            position: absolute;
+            top: 15px;
+            right: -5px;
+            font-weight: bold;
+        }
+
+        .footer-credit {
+            position: absolute; bottom: 10px; right: 15px; font-size: 10px; color: #ccc;
+        }
     </style>
 </head>
 <body>
 
-    <script>
-        function createSnow() {
-            const flake = document.createElement('div');
-            flake.classList.add('snowflake');
-            flake.innerHTML = '●';
-            flake.style.left = Math.random() * 100 + 'vw';
-            flake.style.animationDuration = Math.random() * 3 + 2 + 's';
-            flake.style.opacity = Math.random();
-            flake.style.fontSize = Math.random() * 10 + 5 + 'px';
-            document.body.appendChild(flake);
-            setTimeout(() => flake.remove(), 5000);
-        }
-        setInterval(createSnow, 100);
-    </script>
-
-    <div class="card">
-        <div class="red-header"></div>
+    <div class="card-container">
         
-        <div class="icons-top">🎄 🎁</div>
-        
-        <h1>Merry Christmas, Pooja Sagar!</h1>
-        
-        <div class="nickname">(Meri Churail 🧟‍♀️)</div>
-        
-        <p class="message">
-            "Merry Christmas churail aur haa cringe hai yeah lakin kuch try karna tha tera liya"
-        </p>
-
-        <button class="music-btn" onclick="playMusic()">🎵 Play Dandelions</button>
-        
-        <div class="icons-bottom">
-            <span>❄️</span>
-            <span>✨</span>
-            <span>☃️</span>
+        <div id="step1" class="screen">
+            <div style="font-size: 70px;">⛄</div>
+            <h1 class="cursive-title" style="color:#333">This Christmas, <br> something special for you</h1>
+            <button class="btn-open" onclick="next(2)">Open it</button>
         </div>
-    </div>
 
-    <div id="youtube-player">
-        <iframe id="video" width="0" height="0" src="https://www.youtube.com/embed/W8a4sUADZ8E?enablejsapi=1" frameborder="0"></iframe>
+        <div id="step2" class="screen hidden">
+            <h1 class="cursive-title" style="color:#333">Merry Christmas <br> to my Cutiepie</h1>
+            <div class="message-inner-box" onclick="next(3)">
+                <div class="badge-red">Tap to read</div>
+                <div style="font-size: 80px;">🎅</div>
+            </div>
+        </div>
+
+        <div id="step3" class="screen hidden">
+            <h1 class="cursive-title" style="color:#333">Merry Christmas <br> to my Cutiepie</h1>
+            <div class="message-inner-box" onclick="next(4)">
+                <p>This Christmas, I just want you to know how special you are to me.</p>
+                <br>
+                <p>You are not just a part of my life, you are the reason behind so many smiles.</p>
+            </div>
+        </div>
+
+        <div id="step4" class="screen hidden">
+            <h1 class="cursive-title" style="color:#333">Merry Christmas <br> to my Cutiepie</h1>
+            <div class="message-inner-box" onclick="next(5)">
+                <p>I'll always try my best to be there for you.</p>
+                <p><strong>Thank you for being you.</strong></p>
+                <p style="margin-top: 10px; color: #0095ff;">Click for your surprise! 🎁</p>
+            </div>
+        </div>
+
+        <div id="step5" class="screen hidden red-header-card">
+            <div style="font-size: 50px;">🎄 🎁</div>
+            <h1 class="cursive-title">Merry Christmas, Pooja Sagar!</h1>
+            <p style="font-weight: bold;">(Meri Churail 🧟‍♀️)</p>
+            
+            <p class="hindi-text">
+                "Merry Christmas churail aur haa cringe hai <br> yeah lakin kuch try karna tha tera liya"
+            </p>
+            
+            <div style="font-size: 30px; margin-top: 10px;">❄️ ✨ ☃️</div>
+        </div>
+
+        <div class="footer-credit">@anujbuilds</div>
     </div>
 
     <script>
-        function playMusic() {
-            const iframe = document.getElementById('video');
-            // Sending the play command to the YouTube API
-            iframe.src += "&autoplay=1";
-            document.querySelector('.music-btn').style.display = 'none';
+        function next(num) {
+            document.querySelectorAll('.screen').forEach(s => s.classList.add('hidden'));
+            document.getElementById('step' + num).classList.remove('hidden');
         }
     </script>
-
 </body>
-</html>
+                </html>
