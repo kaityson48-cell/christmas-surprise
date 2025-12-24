@@ -3,207 +3,167 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Christmas Surprise for Pooja</title>
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:ital,wght@0,400;1,600;1,300&display=swap" rel="stylesheet">
+    <title>Merry Christmas!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --primary-red: #e63946;
-            --soft-blue: #f0f7ff;
-            --text-dark: #1d3557;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
-            margin: 0;
-            padding: 0;
+            background: radial-gradient(circle at center, #ffffff 0%, #d7e9f7 100%);
+            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
-            background-color: var(--soft-blue);
             font-family: 'Poppins', sans-serif;
             overflow: hidden;
         }
 
-        /* --- STEP 1: INITIAL GIFT VIEW --- */
-        #step1 {
-            text-align: center;
-            transition: transform 0.5s ease;
-        }
-
-        .gift-container {
-            cursor: pointer;
+        .card-container {
+            width: 350px;
+            height: 550px;
+            background-color: white;
             position: relative;
-            font-size: 80px;
-            animation: bounce 2s infinite;
-        }
-
-        .tap-hint {
-            background: var(--primary-red);
-            color: white;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 14px;
-            position: absolute;
-            top: -20px;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        /* --- STEP 2: REVEAL CARDS VIEW --- */
-        #step2 {
-            display: none;
-            text-align: center;
-        }
-
-        .card-grid {
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            border-radius: 15px;
+            background-image: 
+                linear-gradient(#e1e1e1 1px, transparent 1px),
+                linear-gradient(90deg, #e1e1e1 1px, transparent 1px);
+            background-size: 22px 22px;
             display: flex;
-            gap: 10px;
             justify-content: center;
-            margin-top: 20px;
+            align-items: center;
+            border: 1px solid #eee;
         }
 
-        .mini-card {
-            width: 60px;
-            height: 80px;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        .screen {
+            position: absolute;
+            width: 100%;
+            height: 100%;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            cursor: pointer;
-            font-size: 10px;
-            font-weight: bold;
-            transition: transform 0.3s;
-        }
-
-        .mini-card.revealed {
-            background: #ffeef0;
-            color: var(--primary-red);
-            transform: translateY(-10px);
-        }
-
-        /* --- STEP 3: FINAL PERSONALIZED CARD --- */
-        #step3 {
-            display: none;
-            width: 90%;
-            max-width: 400px;
-            animation: fadeIn 0.8s ease;
-        }
-
-        .final-card {
-            background: white;
-            padding: 40px 20px;
-            border-radius: 25px;
+            padding: 30px;
             text-align: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            border-top: 8px solid var(--primary-red);
+            transition: all 0.4s ease-in-out;
         }
 
-        .final-card h1 {
-            color: var(--primary-red);
-            font-family: 'Great Vibes', cursive;
-            font-size: 2.4rem;
+        .hidden { opacity: 0; pointer-events: none; transform: scale(0.9); }
+
+        /* Styling for the New Final Screen */
+        .red-header-card {
+            border-top: 8px solid #e63946;
+            padding-top: 20px;
+        }
+
+        .cursive-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 28px;
+            color: #e63946;
+            margin-bottom: 10px;
+        }
+
+        .hindi-text {
+            font-size: 14px;
+            font-style: italic;
+            color: #444;
             margin: 15px 0;
         }
 
-        .churail-text {
+        .message-inner-box {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border: 1px solid #f0f0f0;
+            cursor: pointer;
+            width: 90%;
+        }
+
+        .btn-open {
+            background: #0095ff;
+            color: white;
+            border: none;
+            padding: 12px 45px;
+            border-radius: 30px;
+            font-size: 18px;
             font-weight: 600;
-            font-style: italic;
-            color: var(--text-dark);
-            margin-bottom: 20px;
+            cursor: pointer;
+            margin-top: 15px;
         }
 
-        .personal-note {
-            font-size: 0.9rem;
-            color: #555;
-            font-style: italic;
-            line-height: 1.6;
-            margin: 20px 0;
+        .badge-red {
+            background: #e63946;
+            color: white;
+            font-size: 11px;
+            padding: 4px 12px;
+            border-radius: 4px;
+            position: absolute;
+            top: 15px;
+            right: -5px;
+            font-weight: bold;
         }
 
-        /* --- ANIMATIONS --- */
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
+        .footer-credit {
+            position: absolute; bottom: 10px; right: 15px; font-size: 10px; color: #ccc;
         }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.9); }
-            to { opacity: 1; transform: scale(1); }
-        }
-
-        .hidden { display: none !important; }
     </style>
 </head>
 <body>
 
-    <div id="step1">
-        <h2 style="font-weight: 300;">For someone special</h2>
-        <div class="gift-container" onclick="revealCards()">
-            <span class="tap-hint">Tap me!</span>
-            🎁
+    <div class="card-container">
+        
+        <div id="step1" class="screen">
+            <div style="font-size: 70px;">⛄</div>
+            <h1 class="cursive-title" style="color:#333">This Christmas, <br> something special for you</h1>
+            <button class="btn-open" onclick="next(2)">Open it</button>
         </div>
-    </div>
 
-    <div id="step2">
-        <h3>Just for you...</h3>
-        <p>I don't need a gift, because...</p>
-        <div class="card-grid">
-            <div class="mini-card" onclick="revealText(this, 'You')">❤️</div>
-            <div class="mini-card" onclick="revealText(this, 'are')">❤️</div>
-            <div class="mini-card" onclick="revealText(this, 'my')">❤️</div>
-            <div class="mini-card" onclick="revealText(this, 'cutest')">❤️</div>
-            <div class="mini-card" onclick="revealText(this, 'gift')">❤️</div>
-        </div>
-        <button id="finalBtn" class="hidden" onclick="showFinalCard()" style="margin-top: 30px; padding: 10px 20px; border: none; background: var(--primary-red); color: white; border-radius: 20px; cursor: pointer;">Open final surprise</button>
-    </div>
-
-    <div id="step3">
-        <div class="final-card">
-            <div style="font-size: 50px;">🎄 🎁</div>
-            
-            <h1>Merry Christmas, Pooja Sagar!</h1>
-            
-            <div class="churail-text">
-                (Meri Churail 🧟‍♀️)
+        <div id="step2" class="screen hidden">
+            <h1 class="cursive-title" style="color:#333">Merry Christmas <br> to my Cutiepie</h1>
+            <div class="message-inner-box" onclick="next(3)">
+                <div class="badge-red">Tap to read</div>
+                <div style="font-size: 80px;">🎅</div>
             </div>
-
-            <p class="personal-note">
-                "Merry Christmas churail aur haa cringe hai<br>
-                yeah lakin kuch try karna tha tera liya"
-            </p>
-
-            <div style="font-size: 30px; letter-spacing: 10px;">❄️ ✨ ☃️</div>
         </div>
+
+        <div id="step3" class="screen hidden">
+            <h1 class="cursive-title" style="color:#333">Merry Christmas <br> to my Cutiepie</h1>
+            <div class="message-inner-box" onclick="next(4)">
+                <p>This Christmas, I just want you to know how special you are to me.</p>
+                <br>
+                <p>You are not just a part of my life, you are the reason behind so many smiles.</p>
+            </div>
+        </div>
+
+        <div id="step4" class="screen hidden">
+            <h1 class="cursive-title" style="color:#333">Merry Christmas <br> to my Cutiepie</h1>
+            <div class="message-inner-box" onclick="next(5)">
+                <p>I'll always try my best to be there for you.</p>
+                <p><strong>Thank you for being you.</strong></p>
+                <p style="margin-top: 10px; color: #0095ff;">Click for your surprise! 🎁</p>
+            </div>
+        </div>
+
+        <div id="step5" class="screen hidden red-header-card">
+            <div style="font-size: 50px;">🎄 🎁</div>
+            <h1 class="cursive-title">Merry Christmas, Pooja Sagar!</h1>
+            <p style="font-weight: bold;">(Meri Churail 🧟‍♀️)</p>
+            
+            <p class="hindi-text">
+                "Merry Christmas churail aur haa cringe hai <br> yeah lakin kuch try karna tha tera liya"
+            </p>
+            
+            <div style="font-size: 30px; margin-top: 10px;">❄️ ✨ ☃️</div>
+        </div>
+
+        <div class="footer-credit">@anujbuilds</div>
     </div>
 
     <script>
-        let revealCount = 0;
-
-        function revealCards() {
-            document.getElementById('step1').style.display = 'none';
-            document.getElementById('step2').style.display = 'block';
-        }
-
-        function revealText(element, text) {
-            if (!element.classList.contains('revealed')) {
-                element.innerHTML = text;
-                element.classList.add('revealed');
-                revealCount++;
-                
-                if (revealCount === 5) {
-                    document.getElementById('finalBtn').classList.remove('hidden');
-                }
-            }
-        }
-
-        function showFinalCard() {
-            document.getElementById('step2').style.display = 'none';
-            document.getElementById('step3').style.display = 'block';
-            
-            // Optional: Add a small confetti effect or sound here
-            console.log("Surprise revealed for Pooja!");
+        function next(num) {
+            document.querySelectorAll('.screen').forEach(s => s.classList.add('hidden'));
+            document.getElementById('step' + num).classList.remove('hidden');
         }
     </script>
 </body>
