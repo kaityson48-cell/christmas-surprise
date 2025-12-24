@@ -3,157 +3,209 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Merry Christmas Pooja!</title>
+    <title>Christmas Surprise for Pooja</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:ital,wght@0,400;1,600;1,300&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #f0f8ff;
             --primary-red: #e63946;
-            --text-dark: #333;
+            --soft-blue: #f0f7ff;
+            --text-dark: #1d3557;
         }
 
         body {
             margin: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-color);
+            padding: 0;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            overflow-x: hidden;
+            background-color: var(--soft-blue);
+            font-family: 'Poppins', sans-serif;
+            overflow: hidden;
+        }
+
+        /* --- STEP 1: INITIAL GIFT VIEW --- */
+        #step1 {
+            text-align: center;
+            transition: transform 0.5s ease;
+        }
+
+        .gift-container {
+            cursor: pointer;
+            position: relative;
+            font-size: 80px;
+            animation: bounce 2s infinite;
+        }
+
+        .tap-hint {
+            background: var(--primary-red);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* --- STEP 2: REVEAL CARDS VIEW --- */
+        #step2 {
+            display: none;
             text-align: center;
         }
 
-        .container {
-            width: 90%;
-            max-width: 400px;
-            padding: 20px;
-        }
-
-        /* --- STAGE 1: The Gift Box --- */
-        #stage1 .gift-box {
-            font-size: 100px;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-            display: block;
-            margin: 20px auto;
-        }
-
-        #stage1 .gift-box:hover {
-            transform: scale(1.1) rotate(5deg);
-        }
-
-        /* --- STAGE 2: Polaroids --- */
-        .hidden { display: none; }
-        
-        .polaroid-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
+        .card-grid {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
             margin-top: 20px;
         }
 
-        .polaroid {
+        .mini-card {
+            width: 60px;
+            height: 80px;
             background: white;
-            padding: 10px 10px 20px 10px;
+            border-radius: 8px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            transform: rotate(-2deg);
-            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             cursor: pointer;
+            font-size: 10px;
+            font-weight: bold;
+            transition: transform 0.3s;
         }
 
-        .polaroid:nth-child(even) { transform: rotate(3deg); }
+        .mini-card.revealed {
+            background: #ffeef0;
+            color: var(--primary-red);
+            transform: translateY(-10px);
+        }
 
-        .polaroid .heart { color: var(--primary-red); font-size: 24px; }
-        .polaroid .content { font-weight: bold; font-size: 14px; margin-top: 5px; }
+        /* --- STEP 3: FINAL PERSONALIZED CARD --- */
+        #step3 {
+            display: none;
+            width: 90%;
+            max-width: 400px;
+            animation: fadeIn 0.8s ease;
+        }
 
-        /* --- STAGE 3: Final Letter --- */
-        .card {
+        .final-card {
             background: white;
-            border-radius: 20px;
-            padding: 30px;
+            padding: 40px 20px;
+            border-radius: 25px;
+            text-align: center;
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             border-top: 8px solid var(--primary-red);
         }
 
-        h1 { color: var(--primary-red); font-family: 'Brush Script MT', cursive; font-size: 2.5rem; }
-        .sub-text { color: #555; font-style: italic; margin-bottom: 20px; }
-        .message { font-size: 1rem; line-height: 1.6; color: #444; }
-        .footer-emojis { font-size: 30px; margin-top: 20px; }
+        .final-card h1 {
+            color: var(--primary-red);
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.4rem;
+            margin: 15px 0;
+        }
 
+        .churail-text {
+            font-weight: 600;
+            font-style: italic;
+            color: var(--text-dark);
+            margin-bottom: 20px;
+        }
+
+        .personal-note {
+            font-size: 0.9rem;
+            color: #555;
+            font-style: italic;
+            line-height: 1.6;
+            margin: 20px 0;
+        }
+
+        /* --- ANIMATIONS --- */
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .hidden { display: none !important; }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        
-        <div id="stage1">
-            <h2>For someone special</h2>
-            <p>Tap me!</p>
-            <div class="gift-box" onclick="goToStage2()">🎁</div>
+    <div id="step1">
+        <h2 style="font-weight: 300;">For someone special</h2>
+        <div class="gift-container" onclick="revealCards()">
+            <span class="tap-hint">Tap me!</span>
+            🎁
         </div>
+    </div>
 
-        <div id="stage2" class="hidden">
-            <h2>Just for you...</h2>
-            <p>I don't need a gift, because...</p>
-            <div class="polaroid-grid">
-                <div class="polaroid" onclick="checkAllTapped(this)">
-                    <div class="heart">❤️</div>
-                    <div class="content">You</div>
-                </div>
-                <div class="polaroid" onclick="checkAllTapped(this)">
-                    <div class="heart">❤️</div>
-                    <div class="content">Are</div>
-                </div>
-                <div class="polaroid" onclick="checkAllTapped(this)">
-                    <div class="heart">❤️</div>
-                    <div class="content">My</div>
-                </div>
-                <div class="polaroid" onclick="checkAllTapped(this)">
-                    <div class="heart">❤️</div>
-                    <div class="content">Cutest Gift</div>
-                </div>
+    <div id="step2">
+        <h3>Just for you...</h3>
+        <p>I don't need a gift, because...</p>
+        <div class="card-grid">
+            <div class="mini-card" onclick="revealText(this, 'You')">❤️</div>
+            <div class="mini-card" onclick="revealText(this, 'are')">❤️</div>
+            <div class="mini-card" onclick="revealText(this, 'my')">❤️</div>
+            <div class="mini-card" onclick="revealText(this, 'cutest')">❤️</div>
+            <div class="mini-card" onclick="revealText(this, 'gift')">❤️</div>
+        </div>
+        <button id="finalBtn" class="hidden" onclick="showFinalCard()" style="margin-top: 30px; padding: 10px 20px; border: none; background: var(--primary-red); color: white; border-radius: 20px; cursor: pointer;">Open final surprise</button>
+    </div>
+
+    <div id="step3">
+        <div class="final-card">
+            <div style="font-size: 50px;">🎄 🎁</div>
+            
+            <h1>Merry Christmas, Pooja Sagar!</h1>
+            
+            <div class="churail-text">
+                (Meri Churail 🧟‍♀️)
             </div>
-            <button id="finalBtn" class="hidden" onclick="goToStage3()" style="margin-top:20px; padding: 10px 20px; background: var(--primary-red); color: white; border: none; border-radius: 5px; cursor: pointer;">Open final surprise</button>
-        </div>
 
-        <div id="stage3" class="hidden">
-            <div class="card">
-                <div>🎄 🎁</div>
-                <h1>Merry Christmas, Pooja Sagar!</h1>
-                <p class="sub-text">(Meri Churail 🧟‍♀️)</p>
-                <p class="message">
-                    "Merry Christmas churail aur haa cringe hai yeah lakin kuch try karna tha tera liya"
-                </p>
-                <div class="footer-emojis">❄️ ✨ ☃️</div>
-            </div>
-        </div>
+            <p class="personal-note">
+                "Merry Christmas churail aur haa cringe hai<br>
+                yeah lakin kuch try karna tha tera liya"
+            </p>
 
+            <div style="font-size: 30px; letter-spacing: 10px;">❄️ ✨ ☃️</div>
+        </div>
     </div>
 
     <script>
-        let tappedCount = 0;
+        let revealCount = 0;
 
-        function goToStage2() {
-            document.getElementById('stage1').classList.add('hidden');
-            document.getElementById('stage2').classList.remove('hidden');
+        function revealCards() {
+            document.getElementById('step1').style.display = 'none';
+            document.getElementById('step2').style.display = 'block';
         }
 
-        function checkAllTapped(el) {
-            if(!el.classList.contains('tapped')) {
-                el.style.background = "#ffeef0";
-                el.classList.add('tapped');
-                tappedCount++;
-            }
-            if(tappedCount >= 4) {
-                document.getElementById('finalBtn').classList.remove('hidden');
+        function revealText(element, text) {
+            if (!element.classList.contains('revealed')) {
+                element.innerHTML = text;
+                element.classList.add('revealed');
+                revealCount++;
+                
+                if (revealCount === 5) {
+                    document.getElementById('finalBtn').classList.remove('hidden');
+                }
             }
         }
 
-        function goToStage3() {
-            document.getElementById('stage2').classList.add('hidden');
-            document.getElementById('stage3').classList.remove('hidden');
+        function showFinalCard() {
+            document.getElementById('step2').style.display = 'none';
+            document.getElementById('step3').style.display = 'block';
+            
+            // Optional: Add a small confetti effect or sound here
+            console.log("Surprise revealed for Pooja!");
         }
     </script>
 </body>
-    </html>
-    
+                </html>
+                               
