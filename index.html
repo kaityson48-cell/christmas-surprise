@@ -7,7 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
-
+        
         body {
             background: radial-gradient(circle at center, #ffffff 0%, #d7e9f7 100%);
             height: 100vh;
@@ -25,9 +25,7 @@
             position: relative;
             box-shadow: 0 10px 40px rgba(0,0,0,0.1);
             border-radius: 15px;
-            background-image: 
-                linear-gradient(#e1e1e1 1px, transparent 1px),
-                linear-gradient(90deg, #e1e1e1 1px, transparent 1px);
+            background-image: linear-gradient(#e1e1e1 1px, transparent 1px), linear-gradient(90deg, #e1e1e1 1px, transparent 1px);
             background-size: 22px 22px;
             display: flex;
             justify-content: center;
@@ -50,27 +48,14 @@
 
         .hidden { opacity: 0; pointer-events: none; transform: scale(0.9); }
 
-        /* Styling for the New Final Screen */
-        .red-header-card {
-            border-top: 8px solid #e63946;
-            padding-top: 20px;
-        }
-
         .cursive-title {
             font-family: 'Dancing Script', cursive;
-            font-size: 28px;
-            color: #e63946;
-            margin-bottom: 10px;
+            font-size: 30px;
+            color: #333;
+            margin-bottom: 20px;
         }
 
-        .hindi-text {
-            font-size: 14px;
-            font-style: italic;
-            color: #444;
-            margin: 15px 0;
-        }
-
-        .message-inner-box {
+        .message-box {
             background: white;
             padding: 20px;
             border-radius: 10px;
@@ -78,6 +63,7 @@
             border: 1px solid #f0f0f0;
             cursor: pointer;
             width: 90%;
+            position: relative;
         }
 
         .btn-open {
@@ -92,7 +78,7 @@
             margin-top: 15px;
         }
 
-        .badge-red {
+        .badge {
             background: #e63946;
             color: white;
             font-size: 11px;
@@ -104,67 +90,66 @@
             font-weight: bold;
         }
 
-        .footer-credit {
-            position: absolute; bottom: 10px; right: 15px; font-size: 10px; color: #ccc;
-        }
+        /* Final Screen Decoration */
+        .final-header { border-top: 8px solid #e63946; padding-top: 20px; }
+        .final-title { color: #e63946; font-family: 'Dancing Script', cursive; font-size: 28px; }
+        .footer { position: absolute; bottom: 10px; right: 15px; font-size: 10px; color: #ccc; }
     </style>
 </head>
 <body>
 
     <div class="card-container">
-        
-        <div id="step1" class="screen">
+        <div id="p1" class="screen">
             <div style="font-size: 70px;">⛄</div>
-            <h1 class="cursive-title" style="color:#333">This Christmas, <br> something special for you</h1>
-            <button class="btn-open" onclick="next(2)">Open it</button>
+            <h1 class="cursive-title">This Christmas, <br> something special for you</h1>
+            <button class="btn-open" onclick="go(2)">Open it</button>
         </div>
 
-        <div id="step2" class="screen hidden">
-            <h1 class="cursive-title" style="color:#333">Merry Christmas <br> to my Cutiepie</h1>
-            <div class="message-inner-box" onclick="next(3)">
-                <div class="badge-red">Tap to read</div>
+        <div id="p2" class="screen hidden">
+            <h1 class="cursive-title">Merry Christmas <br> to my Cutiepie</h1>
+            <div class="message-box" onclick="go(3)">
+                <div class="badge">Tap to read</div>
                 <div style="font-size: 80px;">🎅</div>
             </div>
         </div>
 
-        <div id="step3" class="screen hidden">
-            <h1 class="cursive-title" style="color:#333">Merry Christmas <br> to my Cutiepie</h1>
-            <div class="message-inner-box" onclick="next(4)">
+        <div id="p3" class="screen hidden">
+            <h1 class="cursive-title">Merry Christmas <br> to my Cutiepie</h1>
+            <div class="message-box" onclick="go(4)">
                 <p>This Christmas, I just want you to know how special you are to me.</p>
                 <br>
                 <p>You are not just a part of my life, you are the reason behind so many smiles.</p>
             </div>
         </div>
 
-        <div id="step4" class="screen hidden">
-            <h1 class="cursive-title" style="color:#333">Merry Christmas <br> to my Cutiepie</h1>
-            <div class="message-inner-box" onclick="next(5)">
+        <div id="p4" class="screen hidden">
+            <h1 class="cursive-title">Merry Christmas <br> to my Cutiepie</h1>
+            <div class="message-box" onclick="go(5)">
                 <p>I'll always try my best to be there for you.</p>
                 <p><strong>Thank you for being you.</strong></p>
-                <p style="margin-top: 10px; color: #0095ff;">Click for your surprise! 🎁</p>
+                <p style="margin-top: 10px; color: #0095ff; font-size: 12px;">(Click for final surprise 🎁)</p>
             </div>
         </div>
 
-        <div id="step5" class="screen hidden red-header-card">
+        <div id="p5" class="screen hidden final-header">
             <div style="font-size: 50px;">🎄 🎁</div>
-            <h1 class="cursive-title">Merry Christmas, Pooja Sagar!</h1>
+            <h1 class="final-title">Merry Christmas, Pooja Sagar!</h1>
             <p style="font-weight: bold;">(Meri Churail 🧟‍♀️)</p>
-            
-            <p class="hindi-text">
+            <p style="font-size: 14px; font-style: italic; margin-top: 15px;">
                 "Merry Christmas churail aur haa cringe hai <br> yeah lakin kuch try karna tha tera liya"
             </p>
-            
-            <div style="font-size: 30px; margin-top: 10px;">❄️ ✨ ☃️</div>
+            <div style="font-size: 30px; margin-top: 15px;">❄️ ✨ ☃️</div>
         </div>
 
-        <div class="footer-credit">@anujbuilds</div>
+        <div class="footer">@anujbuilds</div>
     </div>
 
     <script>
-        function next(num) {
+        function go(n) {
             document.querySelectorAll('.screen').forEach(s => s.classList.add('hidden'));
-            document.getElementById('step' + num).classList.remove('hidden');
+            document.getElementById('p' + n).classList.remove('hidden');
         }
     </script>
 </body>
-</html>
+                </html>
+    
