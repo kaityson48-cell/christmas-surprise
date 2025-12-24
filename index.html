@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Merry Christmas!</title>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -19,8 +20,8 @@
         }
 
         .card-container {
-            width: 350px;
-            height: 550px;
+            width: 360px;
+            height: 600px;
             background-color: white;
             position: relative;
             box-shadow: 0 10px 40px rgba(0,0,0,0.1);
@@ -43,31 +44,54 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 30px;
+            padding: 20px;
             text-align: center;
             transition: all 0.4s ease-in-out;
         }
 
         .hidden { opacity: 0; pointer-events: none; transform: scale(0.9); }
 
-        /* Styling for the New Final Screen */
-        .red-header-card {
-            border-top: 8px solid #e63946;
-            padding-top: 20px;
-        }
-
         .cursive-title {
             font-family: 'Dancing Script', cursive;
             font-size: 28px;
             color: #e63946;
+            margin-bottom: 15px;
+        }
+
+        /* Photo Grid Styling */
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .photo-card {
+            background: white;
+            padding: 8px 8px 20px 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            border: 1px solid #ddd;
+            transform: rotate(var(--r));
+            transition: transform 0.3s;
+        }
+
+        .photo-card:hover { transform: rotate(0deg) scale(1.1); z-index: 10; }
+
+        .photo-inner {
+            width: 100px;
+            height: 100px;
+            background: #ffe5ec;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
             margin-bottom: 10px;
         }
 
-        .hindi-text {
+        .photo-label {
+            font-family: 'Dancing Script', cursive;
             font-size: 14px;
-            font-style: italic;
             color: #444;
-            margin: 15px 0;
         }
 
         .message-inner-box {
@@ -92,21 +116,11 @@
             margin-top: 15px;
         }
 
-        .badge-red {
-            background: #e63946;
-            color: white;
-            font-size: 11px;
-            padding: 4px 12px;
-            border-radius: 4px;
-            position: absolute;
-            top: 15px;
-            right: -5px;
-            font-weight: bold;
-        }
-
         .footer-credit {
             position: absolute; bottom: 10px; right: 15px; font-size: 10px; color: #ccc;
         }
+
+        .hindi-text { font-style: italic; color: #444; margin: 15px 0; font-size: 14px; }
     </style>
 </head>
 <body>
@@ -120,35 +134,47 @@
         </div>
 
         <div id="step2" class="screen hidden">
-            <h1 class="cursive-title" style="color:#333">Merry Christmas <br> to my Cutiepie</h1>
+            <h1 class="cursive-title">Wait for it...</h1>
             <div class="message-inner-box" onclick="next(3)">
-                <div class="badge-red">Tap to read</div>
-                <div style="font-size: 80px;">🎅</div>
+                <p>I don't need a gift, because...</p>
+                <div style="font-size: 50px; margin-top: 10px;">👇</div>
             </div>
         </div>
 
         <div id="step3" class="screen hidden">
-            <h1 class="cursive-title" style="color:#333">Merry Christmas <br> to my Cutiepie</h1>
-            <div class="message-inner-box" onclick="next(4)">
-                <p>This Christmas, I just want you to know how special you are to me.</p>
-                <br>
-                <p>You are not just a part of my life, you are the reason behind so many smiles.</p>
+            <h1 class="cursive-title" style="font-size: 22px;">You are my favorite...</h1>
+            <div class="photo-grid">
+                <div class="photo-card" style="--r: -3deg;">
+                    <div class="photo-inner">❤️</div>
+                    <p class="photo-label">Support</p>
+                </div>
+                <div class="photo-card" style="--r: 4deg;">
+                    <div class="photo-inner">🌟</div>
+                    <p class="photo-label">Sparkle</p>
+                </div>
+                <div class="photo-card" style="--r: -2deg;">
+                    <div class="photo-inner">🍬</div>
+                    <p class="photo-label">Cutie</p>
+                </div>
+                <div class="photo-card" style="--r: 5deg;">
+                    <div class="photo-inner">🎁</div>
+                    <p class="photo-label">Gift</p>
+                </div>
             </div>
+            <button class="btn-open" style="margin-top: 30px;" onclick="next(4)">Next ➔</button>
         </div>
 
         <div id="step4" class="screen hidden">
-            <h1 class="cursive-title" style="color:#333">Merry Christmas <br> to my Cutiepie</h1>
-            <div class="message-inner-box" onclick="next(5)">
-                <p>I'll always try my best to be there for you.</p>
+            <div class="message-inner-box" onclick="triggerFinal()">
                 <p><strong>Thank you for being you.</strong></p>
                 <p style="margin-top: 10px; color: #0095ff;">Click for your surprise! 🎁</p>
             </div>
         </div>
 
-        <div id="step5" class="screen hidden red-header-card">
+        <div id="step5" class="screen hidden" style="border-top: 8px solid #e63946;">
             <div style="font-size: 50px;">🎄 🎁</div>
             <h1 class="cursive-title">Merry Christmas, Pooja Sagar!</h1>
-            <p style="font-weight: bold;">(Meri Churail 🧟‍♀️)</p>
+            <p style="font-weight: bold; color: #333;">(Meri Churail 🧟‍♀️)</p>
             
             <p class="hindi-text">
                 "Merry Christmas churail aur haa cringe hai <br> yeah lakin kuch try karna tha tera liya"
@@ -165,6 +191,35 @@
             document.querySelectorAll('.screen').forEach(s => s.classList.add('hidden'));
             document.getElementById('step' + num).classList.remove('hidden');
         }
+
+        function triggerFinal() {
+            next(5);
+            // Confetti Blast!
+            var duration = 3 * 1000;
+            var end = Date.now() + duration;
+
+            (function frame() {
+              confetti({
+                particleCount: 3,
+                angle: 60,
+                spread: 55,
+                origin: { x: 0 },
+                colors: ['#e63946', '#0095ff', '#ffffff']
+              });
+              confetti({
+                particleCount: 3,
+                angle: 120,
+                spread: 55,
+                origin: { x: 1 },
+                colors: ['#e63946', '#0095ff', '#ffffff']
+              });
+
+              if (Date.now() < end) {
+                requestAnimationFrame(frame);
+              }
+            }());
+        }
     </script>
 </body>
-                </html>
+    </html>
+    
